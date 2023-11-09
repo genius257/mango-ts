@@ -1,6 +1,6 @@
 {
   "name": "@genius257/mango-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TypeScript types for the Mango self-hosted manga server and reader.",
   "main": "dist/index.js",
   "types": "src/mango-plugin.d.ts",
