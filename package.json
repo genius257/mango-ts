@@ -1,9 +1,8 @@
 {
   "name": "@genius257/mango-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TypeScript types for the Mango self-hosted manga server and reader.",
   "main": "dist/index.js",
-  "types": "src/mango-plugin.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
