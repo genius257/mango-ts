@@ -4,10 +4,10 @@ type Opaque<T, K> = K & {readonly [brand]: T}
 export type Manga = {
     id: string;
     title: string;
-    description: string;
-    authors: string[];
-    cover_url: string;
-    tags: string[];
+    description?: string;
+    authors?: string[];
+    cover_url?: string;
+    tags?: string[];
 };
 
 export type Chapter = {
@@ -15,17 +15,17 @@ export type Chapter = {
     title: string;
     pages: number;
     manga_title: string;
-    volume: string;
-    chapter: string;
-    groups: Array<string>;
-    language: string;
-    tags: Array<string>;
+    volume?: string;
+    chapter?: string;
+    groups?: Array<string>;
+    language?: string;
+    tags?: Array<string>;
 };
 
 export type Page = {
     url: string;
     filename: string;
-    headers: Record<string, string>;
+    headers?: Record<string, string>;
 };
 
 export type searchManga = (query: string) => json_encoded<Array<Manga>>;
@@ -42,35 +42,42 @@ export function json_encode<T>(value: T): json_encoded<T> {
     return JSON.stringify(value) as json_encoded<T>;
 }
 
-type MangoHttpResult = {
+type MangoHttpResult<Tbody> = {
     status_code: number;
-    body: string;
+    body: Tbody;
     headers: Record<string, string>;
 }
 
-type MangoStatic = {
-    get(url: string): MangoHttpResult;
-    get(url: string, headers: Record<string, string>): MangoHttpResult;
+type MangoHttpPostResultBody = {
+    data: string,
+    headers: Record<string, string>,
+    json: null | unknown,
+    method: 'POST',
+}
 
-    post(url: string, body: string): MangoHttpResult;
+type MangoStatic = {
+    get(url: string): MangoHttpResult<string>;
+    get(url: string, headers: Record<string, string>): MangoHttpResult<string>;
+
+    post(url: string, body: string): MangoHttpResult<MangoHttpPostResultBody>;
     post(
         url: string,
         body: string,
         headers: Record<string, string>
-    ): MangoHttpResult;
+    ): MangoHttpResult<MangoHttpPostResultBody>;
 
     css(html: string, selector: string): string[];
 
     text(html: string): string;
 
-    attribute(html: string, attr: string): string;
+    attribute(html: string, attr: string): string|undefined;
 
     storage(key: string): string | undefined;
     storage(key: string, val: unknown): unknown;
 
-    settings(key: string): string | null | undefined;
+    settings(key: string): string | undefined;
 
-    raise(msg: string): unknown;
+    raise(msg: string): never;
 }
 
 declare const mango: MangoStatic;
