@@ -1,5 +1,5 @@
 declare const brand: unique symbol;
-type Opaque<T, K> = K & {readonly [brand]: T}
+type Opaque<T, K> = K & { readonly [brand]: T }
 
 /**
  * A manga series in your plugin.
