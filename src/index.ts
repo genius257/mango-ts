@@ -62,7 +62,7 @@ export type Page = {
 export type searchManga = (query: string) => json_encoded<Array<Manga>>;
 export type listChapters = (manga_id: string) => json_encoded<Array<Chapter>>;
 export type selectChapter = (id: string) => json_encoded<Chapter>;
-export type nextPage = () => json_encoded<Page>;
+export type nextPage = () => json_encoded<Page | Record<string, never>>;
 export type newChapters = (
     manga_id: string,
     after_timestamp: number
