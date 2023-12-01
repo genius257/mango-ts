@@ -122,7 +122,7 @@ type MangoStatic = {
      *
      * If no matched attribute is found, undefined is returned.
      */
-    attribute(html: string, attr: string): string|undefined;
+    attribute(html: string, attr: string): string | undefined;
 
     /**
      * Retrives a value under a string identifier equal to the provided key.
